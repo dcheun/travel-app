@@ -1,6 +1,18 @@
+import { text } from "body-parser";
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+const textapi = {
+  application_key: process.env.OWM_API_KEY,
+};
+
 /* Global Variables */
 const BASE_URL =
   "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=";
+
+// Personal API Key for OpenWeatherMap API
+const API_KEY = textapi.application_key;
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById("generate").addEventListener("click", performAction);
