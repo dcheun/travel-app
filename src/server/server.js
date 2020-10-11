@@ -1,15 +1,15 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const path = require("path");
+const geonamesAPI = require("./geonamesAPI");
+
 const PORT = process.env.PORT || 8081;
 
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 // To hold new data entries.
 const data = [];
-
-// Require Express to run server and routes
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const path = require("path");
 
 // Start up an instance of app
 const app = express();
@@ -45,6 +45,15 @@ app.post("/addData", (req, res) => {
   // Save latest entry to projectData.
   projectData = { ...newEntry };
   res.send(projectData);
+});
+
+app.post("/geonames", (req, res) => {
+  const postalCode = req.body.postalCode;
+  geonamesAPI(postalCode)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => console.log("server:geonames:error", err));
 });
 
 // Setup Server
