@@ -48,8 +48,9 @@ app.post("/addData", (req, res) => {
 });
 
 app.post("/geonames", (req, res) => {
-  const postalCode = req.body.postalCode;
-  geonamesAPI(postalCode)
+  const placename = req.body.placename;
+  console.log("server:geonames:placename", placename);
+  geonamesAPI(placename)
     .then((data) => {
       res.send(data);
     })

@@ -1,10 +1,10 @@
 import { handleSubmit } from "./js/app";
+import { checkForLocation } from "./js/locationChecker";
+import { checkForDate } from "./js/dateChecker";
 
 import "./styles/styles.scss";
 
-console.log("I EXIST");
-
-// attach listener to generate.
+// Attach listener to generate.
 document.getElementById("generate").addEventListener("click", handleSubmit);
 
-export { handleSubmit };
+export { handleSubmit, checkForLocation, checkForDate };

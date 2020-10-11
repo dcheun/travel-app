@@ -1,27 +1,45 @@
-import { text } from "body-parser";
-
-const dotenv = require("dotenv");
-dotenv.config();
-
-const textapi = {
-  application_key: process.env.OWM_API_KEY,
-};
-
-/* Global Variables */
-const BASE_URL =
-  "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip=";
-
-// Personal API Key for OpenWeatherMap API
-const API_KEY = textapi.application_key;
-
-// Event listener to add function to existing HTML DOM element
-document.getElementById("generate").addEventListener("click", performAction);
-
 // Create a new date instance dynamically with JS
 function getDate() {
   const d = new Date();
   const newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
   return newDate;
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  let locationText = document.getElementById("placename").value;
+  if (!Client.checkForLocation(locationText)) {
+    return false;
+  }
+  let departingText = document.getElementById("departing").value;
+  if (!Client.checkForDate(departingText)) {
+    return false;
+  }
+
+  const data = { placename: locationText };
+
+  console.log("app.js:handleSubmit");
+
+  postData("http://localhost:8081/geonames", data)
+    .then((res) => {
+      // Geonames returns data in an array. Select the first object.
+      console.log("res:", res.postalCodes);
+      const result = res.postalCodes[0];
+      renderResults(result);
+    })
+    .catch((err) => console.log(err));
+}
+
+function renderResults(results) {
+  console.log(results);
+  // document.getElementById("date").innerHTML = `Date: ${data.date}`;
+  // document.getElementById(
+  //   "temp"
+  // ).innerHTML = `Temperature: ${data.temperature} C`;
+  // document.getElementById(
+  //   "content"
+  // ).innerHTML = `Feelings: ${data.userResponse}`;
 }
 
 /* Function called by event listener */
@@ -104,9 +122,5 @@ const updateUI = async () => {
     console.log("error", error);
   }
 };
-
-function handleSubmit(event) {
-  event.preventDefault();
-}
 
 export { handleSubmit };

@@ -1,37 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>Travel App</title>
-  <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Planner</title>
 </head>
 
 <body>
-  <div id="app">
-    <div class="holder headline">
-      Travel App
+
+  <header>
+    <div class="">
+      Logo
     </div>
-    <div class="holder zip">
-      <label for="zip">Enter Zipcode here</label>
-      <input type="text" id="zip" placeholder="enter zip code here">
+    <div class="">
+      navigation
     </div>
-    <div class="holder feel">
-      <label for="feelings">How are you feeling today?</label>
-      <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
-      <button id="generate" type="submit"> Generate </button>
-    </div>
-    <div class="holder entry">
-      <div class="title">Most Recent Entry</div>
-      <div id="entryHolder">
-        <div id="date"></div>
-        <div id="temp"></div>
-        <div id="content"></div>
+  </header>
+
+  <main>
+    <div id="app">
+      <div class="holder headline">
+        <h1>Travel Planner</h1>
+      </div>
+      <div class="holder placename">
+        <label for="zip">My trip to:</label>
+        <input type="text" id="placename" placeholder="Enter Location">
+      </div>
+      <div class="holder departing">
+        <label for="zip">Departing:</label>
+        <input type="text" id="departing" placeholder="MM/DD/YYYY">
+      </div>
+      <div class="holder feel">
+        <label for="feelings">How are you feeling today?</label>
+        <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
+        <button id="generate" type="submit"> Generate </button>
+      </div>
+      <div class="holder entry">
+        <div class="title">Most Recent Entry</div>
+        <div id="entryHolder">
+          <div id="date"></div>
+          <div id="temp"></div>
+          <div id="content"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="app.js" type="text/javascript"></script>
+
+  </main>
+
+
+  <footer>
+    <p>This is a footer</p>
+  </footer>
 
 </body>
 
