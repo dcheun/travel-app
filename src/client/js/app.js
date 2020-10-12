@@ -1,8 +1,33 @@
+// Selectors
+const departing = document.getElementById("departing");
+
 // Create a new date instance dynamically with JS
 function getDate() {
   const d = new Date();
   const newDate = d.getMonth() + "." + d.getDate() + "." + d.getFullYear();
   return newDate;
+}
+
+function setDepartingRange() {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1; // Jan is 0
+  let yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = "0" + dd;
+  }
+  if (mm < 10) {
+    mm = "0" + mm;
+  }
+  const min = `${yyyy}-${mm}-${dd}`;
+  const max = `${yyyy + 10}-${mm}-${dd}`;
+  departing.setAttribute("min", min);
+  departing.setAttribute("max", max);
+}
+
+function calculateCountdown(startTs, endTs) {
+  const diff = endTs - startTs;
+  return parseInt(Math.ceil(diff / 1000 / 60 / 60 / 24));
 }
 
 function handleSubmit(event) {
@@ -12,10 +37,17 @@ function handleSubmit(event) {
   if (!Client.checkForLocation(locationText)) {
     return false;
   }
-  let departingText = document.getElementById("departing").value;
+  let departingText = departing.value;
   if (!Client.checkForDate(departingText)) {
     return false;
   }
+
+  console.log("handleSubmit:departing:", departing);
+
+  // Caculate countdown.
+  const departingTs = departing.valueAsNumber;
+  const countdown = calculateCountdown(Date.now(), departingTs);
+  console.log("countdown", countdown);
 
   const data = { placename: locationText };
 
@@ -122,5 +154,7 @@ const updateUI = async () => {
     console.log("error", error);
   }
 };
+
+setDepartingRange();
 
 export { handleSubmit };
