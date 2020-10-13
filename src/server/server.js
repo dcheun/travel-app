@@ -4,6 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const geonamesAPI = require("./geonamesAPI");
 const weatherbitAPI = require("./weatherbitAPI");
+const pixabayAPI = require("./pixabayAPI");
 
 const PORT = process.env.PORT || 8081;
 
@@ -69,6 +70,16 @@ app.post("/weatherbit", (req, res) => {
       res.send(data);
     })
     .catch((err) => console.log("server:geonames:error", err));
+});
+
+app.post("/pixabay", (req, res) => {
+  const placename = req.body.placename;
+  console.log("server:pixabay:query", placename);
+  pixabayAPI(placename)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => console.log("server:pixabay:error", err));
 });
 
 // Setup Server

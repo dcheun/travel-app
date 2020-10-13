@@ -87,6 +87,11 @@ function handleSubmit(event) {
     })
     .then((res) => {
       console.log(res);
+      // Pixabay API
+      return postData("http://localhost:8081/pixabay", data);
+    })
+    .then((res) => {
+      console.log(res);
     })
     .catch((err) => console.log(err));
 }
