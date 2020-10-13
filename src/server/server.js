@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const geonamesAPI = require("./geonamesAPI");
+const weatherbitAPI = require("./weatherbitAPI");
 
 const PORT = process.env.PORT || 8081;
 
@@ -52,6 +53,19 @@ app.post("/geonames", (req, res) => {
   console.log("server:geonames:placename", placename);
   geonamesAPI(placename)
     .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => console.log("server:geonames:error", err));
+});
+
+app.post("/weatherbit", (req, res) => {
+  const { lat, lon, type, start_day, end_day } = req.body;
+  console.log(
+    `server:weatherbit: lat=${lat},lon=${lon},type=${type},start_day=${start_day},end_day=${end_day}`
+  );
+  weatherbitAPI(lat, lon, type, start_day, end_day)
+    .then((data) => {
+      console.log(data);
       res.send(data);
     })
     .catch((err) => console.log("server:geonames:error", err));

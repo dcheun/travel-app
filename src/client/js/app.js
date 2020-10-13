@@ -58,7 +58,35 @@ function handleSubmit(event) {
       // Geonames returns data in an array. Select the first object.
       console.log("res:", res.postalCodes);
       const result = res.postalCodes[0];
+      const { lat, lng } = result;
+      console.log(`res: lat=${lat},lng=${lng}`);
+      const d1 = new Date(departing.valueAsDate);
+      const d2 = new Date(departing.valueAsDate);
+      let type = "forecast";
+      if (countdown > 7) {
+        type = "normals";
+        d1.setDate(d1.getDate() - 4);
+        d2.setDate(d2.getDate() + 4);
+      }
+      const d1Month = d1.getMonth() + 1;
+      const d2Month = d1.getMonth() + 1;
+      const weatherbitData = {
+        lat,
+        lon: lng,
+        type,
+        start_day: `${d1Month < 10 ? "0" + d1Month : d1Month}-${
+          d1.getDate() < 10 ? "0" + d1.getDate() : d1.getDate()
+        }`,
+        end_day: `${d2Month < 10 ? "0" + d2Month : d2Month}-${
+          d2.getDate() < 10 ? "0" + d2.getDate() : d2.getDate()
+        }`,
+      };
+      console.log(weatherbitData);
       renderResults(result);
+      return postData("http://localhost:8081/weatherbit", weatherbitData);
+    })
+    .then((res) => {
+      console.log(res);
     })
     .catch((err) => console.log(err));
 }
