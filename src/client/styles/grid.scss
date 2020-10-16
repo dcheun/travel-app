@@ -1,0 +1,39 @@
+.top-container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: repeat(12, 1fr);
+  // grid-template-rows: 2fr 1fr 5fr 3fr 1fr;
+  grid-template-rows: 6rem auto 3rem;
+}
+
+header {
+  grid-column: span 12;
+  background-color: #222831;
+  color: rgb(226, 226, 226);
+}
+
+main {
+  grid-column: span 12;
+  display: grid;
+  min-height: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 4rem auto 12rem;
+}
+
+.title-box {
+  grid-column: span 12;
+}
+
+.detail-box {
+  grid-column: span 12;
+}
+
+.input-box {
+  grid-column: span 12;
+}
+
+footer {
+  grid-column: span 12;
+  background-color: #4f8a8b;
+  color: rgb(226, 226, 226);
+}

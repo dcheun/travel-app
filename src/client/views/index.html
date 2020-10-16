@@ -9,48 +9,54 @@
 
 <body>
 
-  <header>
-    <div class="">
-      Logo
-    </div>
-    <div class="">
-      navigation
-    </div>
-  </header>
+  <div class="top-container">
 
-  <main>
-    <div id="app">
-      <div class="holder headline">
-        <h1>Travel Planner</h1>
+    <header>
+      <div class="">
+        Logo
       </div>
-      <div class="holder placename">
-        <label for="placename">My trip to:</label>
-        <input type="text" id="placename" placeholder="Enter Location">
+      <div class="">
+        navigation
       </div>
-      <div class="holder departing">
-        <label for="departing">Departing:</label>
-        <input type="date" id="departing" placeholder="MM/DD/YYYY" min='2020-01-01' max='2030-01-01'>
+    </header>
+
+    <main>
+      <div class="title-box">
+        Title Box
       </div>
-      <div class="holder feel">
-        <label for="feelings">How are you feeling today?</label>
-        <textarea class="myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
-        <button id="generate" type="submit"> Generate </button>
-      </div>
-      <div class="holder entry">
-        <div class="title">Most Recent Entry</div>
-        <div id="entryHolder">
-          <div id="date"></div>
-          <div id="temp"></div>
-          <div id="content"></div>
+
+      <!-- <div id="app"> -->
+      <div class="detail-box">
+        Detail box
+
+
+        <div class="holder headline">
+          <h1>Travel Planner</h1>
         </div>
+        <div class="holder departing">
+          <label for="departing">Departing:</label>
+          <input type="date" id="departing" placeholder="MM/DD/YYYY" min='2020-01-01' max='2030-01-01'>
+        </div>
+
+
       </div>
-    </div>
+      <div class="input-box">
+        <div class="holder placename">
+          <label for="placename">My trip to:</label>
+          <input type="text" id="placename" placeholder="Enter Location">
+        </div>
 
-  </main>
+        <button id="save-trip" type="submit">Save Trip</button>
 
-  <footer>
-    <p>This is a footer</p>
-  </footer>
+        <!-- </div> -->
+
+    </main>
+
+    <footer>
+      <p>This is a footer</p>
+    </footer>
+  </div>
+
   <script>
     // Check that service workers are supported
     if ('serviceWorker' in navigator) {
