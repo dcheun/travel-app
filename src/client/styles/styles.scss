@@ -1,8 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;900&family=Playfair+Display:wght@400;500;800&family=Poppins&display=swap');
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+:root {
+  --main-gutter: 4em;
+  --hdr-ftr-gutter: 2em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-    background: #fffff8;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fffff8;
+  font-family: 'Poppins', sans-serif;
 }
 
 #app {
@@ -38,42 +49,54 @@ body {
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label {
-    display: block;
-    font-size: 27px;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  height: 2rem;
 }
 
 input {
-    display: block;
-    height: 60px;
-    width: 320px;
-    background: #22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
+  display: block;
+  height: 2rem;
+  width: 15rem;
+  // background: #22b2da;
+  // color: #fffff8;
+  font-size: 1.5rem;
+  // font-family: 'Oswald', sans-serif;
+  // border: 1px solid black;
+  border: 1px solid rgba(0,0,0,0.5);
+  border-style: none none solid none;
 }
 
 button {
-    width: 400px;
-    height: 100px;
-    background: #3b4a6b;
-    color: #f0d43a;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
+  padding: 0.5rem 1rem;
+  background: #fffff8;
+  font-size: 1.5rem;
+  // font-family: 'Oswald', sans-serif;
+  border: 0.2rem solid black;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.detail-save {
+  margin-right: 1rem;
+}
+
+button:hover {
+  color: #fffff8;
+  background-color: #222831;
 }
 
 h1 {
-    font-size: 36px;
+  font-size: 3.5rem;
 }
 
-textarea {
-    background: #22b2da;
-    color: #f0d43a;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
+// textarea {
+//     background: #22b2da;
+//     color: #f0d43a;
+//     font-size: 20px;
+//     font-family: 'Oswald', sans-serif;
+// }
 
 /* Reset style for HTML element on active to have no border*/
 input:focus,
@@ -86,21 +109,15 @@ button:focus {
 /* Style for Placeholder Text*/
 ::placeholder {
     /* Firefox, Chrome, Opera */
-    color: #f0d43a;
-    font-family: 'Oswald', sans-serif;
-
+    color: #636c72;
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #f0d43a;
-    font-family: 'Oswald', sans-serif;
-
+    color: #636c72;
 }
 
 ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #f0d43a;
-    font-family: 'Oswald', sans-serif;
-
+    color: #636c72;
 }

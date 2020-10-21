@@ -1,0 +1,72 @@
+/********* Navbar items *********/
+
+nav {
+  height: 100%;
+}
+
+.nav-items {
+  display: flex;
+  padding: 0 var(--hdr-ftr-gutter);
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  text-transform: uppercase;
+}
+
+.nav-brand {
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  color: rgb(266,266,266);
+}
+
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links a {
+  color: rgb(226, 226, 226);
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-links a:hover {
+  color: #fbd46d;
+}
+
+/********* Media Queries *********/
+
+@media screen and (max-width: 1024px) {
+  .nav-items {
+    padding: 0 1.75em;
+  }
+
+  .nav-links {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav-items {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
