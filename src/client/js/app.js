@@ -49,14 +49,24 @@ function handleSubmit(event) {
   const countdown = calculateCountdown(Date.now(), departingTs);
   console.log("countdown", countdown);
 
-  const data = { placename: locationText };
+  const data = {
+    location: locationText,
+    departing: departingText,
+    countdown: countdown,
+  };
 
-  console.log("app.js:handleSubmit");
+  console.log("app.js:handleSubmit: data=", data);
 
   postData("http://localhost:8081/geonames", data)
     .then((res) => {
       // Geonames returns data in an array. Select the first object.
       console.log("res:", res.postalCodes);
+      // Check if no codes were returned, likely invalid place name.
+      if (res.postalCodes.length === 0) {
+        const msg = `Cannot find coordinates for ${data.location}`;
+        alert(msg);
+        throw new Error(msg);
+      }
       const result = res.postalCodes[0];
       const { lat, lng } = result;
       console.log(`res: lat=${lat},lng=${lng}`);
@@ -65,9 +75,13 @@ function handleSubmit(event) {
       let type = "forecast";
       if (countdown > 7) {
         type = "normals";
-        d1.setDate(d1.getDate() - 4);
-        d2.setDate(d2.getDate() + 4);
+        // d1.setDate(d1.getDate() - 4);
+        // d2.setDate(d2.getDate() + 4);
       }
+      // Save to data.
+      data.lat = lat;
+      data.lng = lng;
+      data.weatherType = type;
       const d1Month = d1.getMonth() + 1;
       const d2Month = d1.getMonth() + 1;
       const weatherbitData = {
@@ -87,11 +101,35 @@ function handleSubmit(event) {
     })
     .then((res) => {
       console.log(res);
+      // Weatherbit returns array of 16 day forecast.
+      // Find the result with the target date.
+      let weatherInfo;
+      if (data.weatherType === "forecast") {
+        weatherInfo = res.data.find((d) => d.valid_date === data.departing);
+      } else {
+        weatherInfo = res.data[0];
+      }
+      console.log(weatherInfo);
+      data.weather = weatherInfo;
       // Pixabay API
       return postData("http://localhost:8081/pixabay", data);
     })
     .then((res) => {
       console.log(res);
+      // Store the image.
+      if (res.hits.length > 0) {
+        data.image = res.hits[0].webformatURL;
+      } else {
+        data.image =
+          "https://www.publicdomainpictures.net/pictures/270000/velka/world-map-travel-couple-travele.jpg";
+      }
+      console.log("data=", data);
+      // Add data to API.
+      postData("http://localhost:8081/addData", data);
+    })
+    .then(() => {
+      // Retrieve data and update DOM elements with content
+      updateUI();
     })
     .catch((err) => console.log(err));
 }
@@ -173,21 +211,50 @@ const getData = async (url = "") => {
 };
 
 const updateUI = async () => {
-  const data = await getData("/data");
+  const data = await getData("http://localhost:8081/data");
   try {
     // Update text of UI elements:
-    document.getElementById("date").innerHTML = `Date: ${data.date}`;
+    // const img = document.createElement("img");
+    // img.className = "dest-photo";
+    // img.src = data.image;
     document.getElementById(
-      "temp"
-    ).innerHTML = `Temperature: ${data.temperature} C`;
+      "dest-photo"
+    ).innerHTML = `<img src="${data.image}" alt="Location photo" class="dest-photo">`;
     document.getElementById(
-      "content"
-    ).innerHTML = `Feelings: ${data.userResponse}`;
+      "detail-dest"
+    ).innerHTML = `My trip to: ${data.location}`;
+    document.getElementById(
+      "detail-departing"
+    ).innerHTML = `Departing: ${data.departing}`;
+    document.getElementById("detail-countdown").innerHTML = `${
+      data.location
+    } is ${data.countdown} day${data.countdown > 1 ? "s" : ""} away`;
+    let innerHTML = "";
+    if (data.weatherType === "forecast") {
+      innerHTML = `<div class="detail-weather-hdr">Weather forecast:</div>High: ${data.weather.high_temp}, Low: ${data.weather.low_temp}<br />${data.weather.weather.description} throughout the day.`;
+    } else {
+      innerHTML = `<div class="detail-weather-hdr">Typical weather for then is:</div>Avg: ${data.weather.temp}, Max: ${data.weather.max_temp}, Min: ${data.weather.min_temp}`;
+    }
+    document.getElementById("detail-weather").innerHTML = innerHTML;
+    console.log(data);
   } catch (error) {
     console.log("error", error);
   }
 };
 
+const resetUI = () => {
+  document.getElementById(
+    "dest-photo"
+  ).innerHTML = `<img src="https://www.publicdomainpictures.net/pictures/290000/velka/using-gps.jpg" alt="Location photo" class="dest-photo">`;
+  document.getElementById("detail-dest").innerHTML = `Where do you want to go?`;
+  document.getElementById(
+    "detail-departing"
+  ).innerHTML = `When are you leaving?`;
+  document.getElementById("detail-countdown").innerHTML =
+    "Enter information below.";
+  document.getElementById("detail-weather").innerHTML = "";
+};
+
 setDepartingRange();
 
-export { handleSubmit };
+export { handleSubmit, resetUI };

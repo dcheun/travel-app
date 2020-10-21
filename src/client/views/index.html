@@ -12,48 +12,74 @@
   <div class="top-container">
 
     <header>
-      <div class="">
-        Logo
-      </div>
-      <div class="">
-        navigation
-      </div>
+      <nav>
+        <div class="nav-items">
+          <div class="nav-brand">Travel Planner</div>
+          <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
     </header>
 
     <main>
       <div class="title-box">
-        Title Box
+        My Trip:
       </div>
 
-      <!-- <div id="app"> -->
       <div class="detail-box">
-        Detail box
 
-
-        <div class="holder headline">
-          <h1>Travel Planner</h1>
+        <div class="detail-1">
+          <div id="dest-photo">
+            <img src="https://www.publicdomainpictures.net/pictures/290000/velka/using-gps.jpg" alt="Location photo"
+              class="dest-photo">
+          </div>
         </div>
-        <div class="holder departing">
-          <label for="departing">Departing:</label>
-          <input type="date" id="departing" placeholder="MM/DD/YYYY" min='2020-01-01' max='2030-01-01'>
+        <div class="detail-2">
+          <div id="detail-dest">Where do you want to go?</div>
+          <div id="detail-departing">When are you leaving?</div>
+          <div id="detail-flight"></div>
+          <div id="detail-lodging"></div>
+          <div id="detail-pack-list"></div>
+          <div id="detail-notes"></div>
+          <div id="detail-countdown">
+            Enter information below.
+          </div>
+          <div id="detail-weather"></div>
         </div>
-
 
       </div>
-      <div class="input-box">
-        <div class="holder placename">
-          <label for="placename">My trip to:</label>
-          <input type="text" id="placename" placeholder="Enter Location">
-        </div>
-
-        <button id="save-trip" type="submit">Save Trip</button>
-
-        <!-- </div> -->
-
     </main>
 
+    <div class="input-box container">
+      <div class="input-box-1">
+        <label for="placename">My trip to: </label>
+        <label for="departing">Departing: </label>
+      </div>
+      <div class="input-box-2">
+        <input type="text" id="placename" placeholder="Enter Location">
+        <input type="date" id="departing" min='2020-01-01' max='2030-01-01'>
+      </div>
+      <div class="input-box-3">
+        <button id="save-trip" type="submit">save trip</button>
+      </div>
+      <div class="input-box-4">
+        <button id="remove-trip" type="submit">remove trip</button>
+      </div>
+    </div>
+
+
     <footer>
-      <p>This is a footer</p>
+      <div class="footer-items">
+        <div class="copyright">© 2020 DSC Media Group</div>
+        <div class="social-media">
+          <a href="#" class="social-media-icon"><i class="fa fa-facebook fa-lg"></i></a>
+          <a href="#" class="social-media-icon"><i class="fa fa-twitter fa-lg"></i></a>
+          <a href="#" class="social-media-icon"><i class="fa fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
     </footer>
   </div>
 

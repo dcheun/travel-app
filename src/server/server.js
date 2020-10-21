@@ -1,3 +1,13 @@
+// Setup empty JS object to act as endpoint for all routes
+projectData = {};
+// To hold new data entries.
+const data = [];
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+const PORT = process.env.PORT || 8081;
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -5,13 +15,6 @@ const path = require("path");
 const geonamesAPI = require("./geonamesAPI");
 const weatherbitAPI = require("./weatherbitAPI");
 const pixabayAPI = require("./pixabayAPI");
-
-const PORT = process.env.PORT || 8081;
-
-// Setup empty JS object to act as endpoint for all routes
-projectData = {};
-// To hold new data entries.
-const data = [];
 
 // Start up an instance of app
 const app = express();
@@ -39,20 +42,26 @@ app.get("/all", (req, res) => {
 // Post route to add new data.
 app.post("/addData", (req, res) => {
   newEntry = {
-    temperature: req.body.temperature,
-    date: req.body.date,
-    userResponse: req.body.userResponse,
+    location: req.body.location,
+    lat: req.body.lat,
+    lng: req.body.lng,
+    departing: req.body.departing,
+    countdown: req.body.countdown,
+    weather: req.body.weather,
+    weatherType: req.body.weatherType,
+    image: req.body.image,
   };
   data.push(newEntry);
   // Save latest entry to projectData.
   projectData = { ...newEntry };
+  console.log("projectData=", projectData);
   res.send(projectData);
 });
 
 app.post("/geonames", (req, res) => {
-  const placename = req.body.placename;
-  console.log("server:geonames:placename", placename);
-  geonamesAPI(placename)
+  const location = req.body.location;
+  console.log("server:geonames:location", location);
+  geonamesAPI(location)
     .then((data) => {
       res.send(data);
     })
@@ -73,9 +82,9 @@ app.post("/weatherbit", (req, res) => {
 });
 
 app.post("/pixabay", (req, res) => {
-  const placename = req.body.placename;
-  console.log("server:pixabay:query", placename);
-  pixabayAPI(placename)
+  const location = req.body.location;
+  console.log("server:pixabay:query", location);
+  pixabayAPI(location)
     .then((data) => {
       res.send(data);
     })
