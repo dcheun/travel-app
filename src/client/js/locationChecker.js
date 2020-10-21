@@ -1,7 +1,7 @@
 function checkForLocation(inputText) {
   console.log("checkForLocation", inputText);
 
-  const regexp = /^.*$/;
+  const regexp = /^.+$/;
   const match = regexp.test(inputText);
 
   if (!match) {
