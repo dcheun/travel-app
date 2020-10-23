@@ -21,3 +21,24 @@
 #detail-weather {
   font-size: 1.3rem;
 }
+
+.loading {
+  background-color: #fbd46d;
+}
+
+.weather-icon {
+  height: 3rem;
+  width: 3rem;
+  vertical-align: middle;
+}
+
+.extra-table {
+  width: 100%;
+  max-width: 32rem;
+  margin-bottom: 1rem;
+}
+
+.td-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}

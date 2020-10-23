@@ -22,7 +22,6 @@ nav {
   color: rgb(266,266,266);
 }
 
-
 .nav-links {
   display: flex;
   justify-content: space-around;
@@ -36,8 +35,8 @@ nav {
 .nav-links a {
   color: rgb(226, 226, 226);
   text-decoration: none;
-  letter-spacing: 0.2em;
-  font-size: 0.9em;
+  letter-spacing: 0.2rem;
+  font-size: 0.9rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -50,7 +49,7 @@ nav {
 
 @media screen and (max-width: 1024px) {
   .nav-items {
-    padding: 0 1.75em;
+    padding: 0 1.75rem;
   }
 
   .nav-links {
@@ -62,7 +61,7 @@ nav {
   .nav-items {
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .nav-links {

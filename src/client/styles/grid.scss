@@ -33,7 +33,7 @@ main {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
-  padding-left: 4rem;
+  padding-left: var(--main-gutter);
 }
 
 .detail-box {
@@ -100,4 +100,39 @@ footer {
   grid-column: span 12;
   background-color: #4f8a8b;
   color: rgb(226, 226, 226);
+}
+
+/********* Media Queries *********/
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --main-gutter: 3em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --main-gutter: 1.5em;
+    --hdr-ftr-gutter: 1.5em;
+  }
+
+  .detail-1 {
+    grid-column: span 12;
+    padding-left: var(--main-gutter);
+    padding-right: var(--main-gutter);
+    margin-bottom: 1rem;
+  }
+  
+  .detail-2 {
+    grid-column: span 12;
+    padding-left: var(--main-gutter);
+    padding-right: var(--main-gutter);
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  :root {
+    font-size: 0.85rem;
+  }
 }
