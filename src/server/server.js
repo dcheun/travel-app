@@ -3,15 +3,6 @@ projectData = {};
 // To hold new data entries.
 const data = [];
 
-const dotenv = require("dotenv");
-dotenv.config();
-
-const textapi = {
-  geonamesKey: process.env.GEONAMES_UN,
-  pixabayKey: process.env.PIXABAY_API_KEY,
-  weatherbitKey: process.env.WEATHERBIT_API_KEY,
-};
-
 const PORT = process.env.PORT || 8081;
 
 const express = require("express");

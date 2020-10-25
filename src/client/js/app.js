@@ -268,7 +268,25 @@ const handleError = (err) => {
 };
 
 const setUp = () => {
+  // Attach listeners to buttons.
+  document.getElementById("save-trip").addEventListener("click", handleSubmit);
+  document.getElementById("remove-trip").addEventListener("click", resetUI);
+
+  const extraInfo = ["flight", "lodging", "packing", "notes"];
+  extraInfo.forEach((name) => {
+    document
+      .getElementById(`btn-add-${name}`)
+      .addEventListener("click", addExtraInfo.bind(null, name));
+    document
+      .getElementById(`save-${name}-info`)
+      .addEventListener("click", saveExtraInfo.bind(null, name));
+    document
+      .getElementById(`cancel-${name}-info`)
+      .addEventListener("click", closeModal);
+  });
+
   setDepartingRange();
+
   // Closes the modal if any part of it is clicked, eg: outside the dialog box.
   window.onclick = function (event) {
     if (event.target == modal) {
