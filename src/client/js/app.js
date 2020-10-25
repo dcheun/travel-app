@@ -56,7 +56,7 @@ function handleSubmit(event) {
     countdown: countdown,
   };
 
-  postData("http://localhost:8081/geonames", data)
+  postData("/geonames", data)
     .then((res) => {
       // Check if no codes were returned, likely invalid place name.
       if (res.postalCodes.length === 0) {
@@ -90,7 +90,7 @@ function handleSubmit(event) {
           d2.getDate() < 10 ? "0" + d2.getDate() : d2.getDate()
         }`,
       };
-      return postData("http://localhost:8081/weatherbit", weatherbitData);
+      return postData("/weatherbit", weatherbitData);
     })
     .then((res) => {
       // For forecast, Weatherbit returns array of 16 day forecast.
@@ -103,7 +103,7 @@ function handleSubmit(event) {
       }
       data.weather = weatherInfo;
       // Pixabay API
-      return postData("http://localhost:8081/pixabay", data);
+      return postData("/pixabay", data);
     })
     .then((res) => {
       // Store the image.
@@ -114,7 +114,7 @@ function handleSubmit(event) {
           "https://www.publicdomainpictures.net/pictures/270000/velka/world-map-travel-couple-travele.jpg";
       }
       // Add data to API.
-      postData("http://localhost:8081/addData", data);
+      postData("/addData", data);
     })
     .then(() => {
       // Retrieve data and update DOM elements with content
@@ -156,7 +156,7 @@ const getData = async (url = "") => {
 };
 
 const updateUI = async () => {
-  const data = await getData("http://localhost:8081/data");
+  const data = await getData("/data");
   try {
     // Update text of UI elements:
     document.getElementById("dest-photo").innerHTML = `
@@ -207,7 +207,7 @@ const weatherTemplate = (data) => {
 
 const resetUI = async (event) => {
   event.preventDefault();
-  await postData("http://localhost:8081/clearData");
+  await postData("/clearData");
   document.getElementById(
     "dest-photo"
   ).innerHTML = `<img src="https://www.publicdomainpictures.net/pictures/290000/velka/using-gps.jpg" alt="Location photo" class="dest-photo">`;
@@ -240,7 +240,7 @@ const saveExtraInfo = async (name, event) => {
     return;
   }
   const _data = { [name]: info };
-  const data = await postData("http://localhost:8081/updateData", _data);
+  const data = await postData("/updateData", _data);
   document.getElementById(`detail-${name}`).innerHTML = `
     <tr>
       <td class="td-title">
