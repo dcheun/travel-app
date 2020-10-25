@@ -25,9 +25,7 @@
     </header>
 
     <main>
-      <div class="title-box">
-        My Trip:
-      </div>
+      <div class="title-box">My Trip:</div>
 
       <div class="detail-box">
 
@@ -36,14 +34,71 @@
             <img src="https://www.publicdomainpictures.net/pictures/290000/velka/using-gps.jpg" alt="Location photo"
               class="dest-photo">
           </div>
+          <button id="btn-add-flight" class="btn-add"><i class="fa fa-plus"></i> add flight info</button>
+          <button id="btn-add-lodging" class="btn-add btn-add-lodging"><i class="fa fa-plus"></i> add lodging
+            info</button>
+          <button id="btn-add-packing" class="btn-add btn-add-packing"><i class="fa fa-plus"></i> add packing
+            list</button>
+          <button id="btn-add-notes" class="btn-add btn-add-notes"><i class="fa fa-plus"></i> add notes</button>
+
+
+          <!-- The Modal -->
+          <div id="modal" class="modal">
+
+            <div id="flight-modal-content" class="modal-content">
+              <div class="modal-input-grp">
+                <label class="modal-label" for="flight-info">Flight Info: </label>
+                <input class="modal-input" type="text" id="flight-info" placeholder="Udacity Air Flight 22">
+              </div>
+              <div class="modal-btn-grp">
+                <button class="modal-btn" id="save-flight-info" type="submit">save</button>
+                <button class="modal-btn" id="cancel-flight-info" type="submit">cancel</button>
+              </div>
+            </div>
+            <div id="lodging-modal-content" class="modal-content">
+              <div class="modal-input-grp">
+                <label class="modal-label" for="lodging-info">Lodging Info: </label>
+                <input class="modal-input" type="text" id="lodging-info" placeholder="Marriott">
+              </div>
+              <div class="modal-btn-grp">
+                <button class="modal-btn" id="save-lodging-info" type="submit">save</button>
+                <button class="modal-btn" id="cancel-lodging-info" type="submit">cancel</button>
+              </div>
+            </div>
+            <div id="packing-modal-content" class="modal-content">
+              <div class="modal-input-grp">
+                <label class="modal-label" for="packing-info">Packing List: </label>
+                <input class="modal-input" type="text" id="packing-info" placeholder="phone, laptop, ...">
+              </div>
+              <div class="modal-btn-grp">
+                <button class="modal-btn" id="save-packing-info" type="submit">save</button>
+                <button class="modal-btn" id="cancel-packing-info" type="submit">cancel</button>
+              </div>
+            </div>
+            <div id="notes-modal-content" class="modal-content">
+              <div class="modal-input-grp">
+                <label class="modal-label" for="notes-info">Notes: </label>
+                <input class="modal-input" type="text" id="notes-info" placeholder="Enter Notes">
+              </div>
+              <div class="modal-btn-grp">
+                <button class="modal-btn" id="save-notes-info" type="submit">save</button>
+                <button class="modal-btn" id="cancel-notes-info" type="submit">cancel</button>
+              </div>
+            </div>
+
+          </div>
+
+
         </div>
         <div class="detail-2">
           <div id="detail-dest">Where do you want to go?</div>
           <div id="detail-departing">When are you leaving?</div>
-          <div id="detail-flight"></div>
-          <div id="detail-lodging"></div>
-          <div id="detail-pack-list"></div>
-          <div id="detail-notes"></div>
+          <table id="extra-table" class="extra-table">
+            <tbody id="detail-flight"></tbody>
+            <tbody id="detail-lodging"></tbody>
+            <tbody id="detail-packing"></tbody>
+            <tbody id="detail-notes"></tbody>
+          </table>
           <div id="detail-countdown">
             Enter information below.
           </div>

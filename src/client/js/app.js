@@ -1,6 +1,12 @@
 // Selectors
 const departing = document.getElementById("departing");
 
+const modal = document.getElementById("modal");
+const flightModal = document.getElementById("flight-modal-content");
+const lodgingModal = document.getElementById("lodging-modal-content");
+const packingModal = document.getElementById("packing-modal-content");
+const notesModal = document.getElementById("notes-modal-content");
+
 // Create a new date instance dynamically with JS
 function getDate() {
   const d = new Date();
@@ -43,6 +49,8 @@ function handleSubmit(event) {
   }
 
   console.log("handleSubmit:departing:", departing);
+  document.getElementById("detail-countdown").innerHTML =
+    '<span class="loading">Loading... Please wait.</span>';
 
   // Caculate countdown.
   const departingTs = departing.valueAsNumber;
@@ -131,7 +139,9 @@ function handleSubmit(event) {
       // Retrieve data and update DOM elements with content
       updateUI();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      handleError(err);
+    });
 }
 
 function renderResults(results) {
@@ -174,7 +184,7 @@ const getAPIData = async (BASE_URL, key, zip, feelings) => {
       temperature: data.main.temp,
     };
   } catch (error) {
-    console.log("error", error);
+    handleError(error);
   }
 };
 
@@ -194,7 +204,7 @@ const postData = async (url = "", data = {}) => {
     const newData = await res.json();
     return newData;
   } catch (error) {
-    console.log("error", error);
+    handleError(error);
   }
 };
 
@@ -206,7 +216,7 @@ const getData = async (url = "") => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log("error", error);
+    handleError(error);
   }
 };
 
@@ -217,9 +227,9 @@ const updateUI = async () => {
     // const img = document.createElement("img");
     // img.className = "dest-photo";
     // img.src = data.image;
-    document.getElementById(
-      "dest-photo"
-    ).innerHTML = `<img src="${data.image}" alt="Location photo" class="dest-photo">`;
+    document.getElementById("dest-photo").innerHTML = `
+      <img src="${data.image}" alt="Location photo" class="dest-photo">
+      `;
     document.getElementById(
       "detail-dest"
     ).innerHTML = `My trip to: ${data.location}`;
@@ -231,18 +241,27 @@ const updateUI = async () => {
     } is ${data.countdown} day${data.countdown > 1 ? "s" : ""} away`;
     let innerHTML = "";
     if (data.weatherType === "forecast") {
-      innerHTML = `<div class="detail-weather-hdr">Weather forecast:</div>High: ${data.weather.high_temp}, Low: ${data.weather.low_temp}<br />${data.weather.weather.description} throughout the day.`;
+      innerHTML = `
+        <div class="detail-weather-hdr">Weather forecast:</div>
+        <img class="weather-icon" alt="Weather Icon" src="https://www.weatherbit.io/static/img/icons/${data.weather.weather.icon}.png" />
+        High: ${data.weather.high_temp} F, Low: ${data.weather.low_temp} F
+        <br />${data.weather.weather.description} throughout the day.
+        `;
     } else {
-      innerHTML = `<div class="detail-weather-hdr">Typical weather for then is:</div>Avg: ${data.weather.temp}, Max: ${data.weather.max_temp}, Min: ${data.weather.min_temp}`;
+      innerHTML = `
+        <div class="detail-weather-hdr">Typical weather for then is:
+        </div>Avg: ${data.weather.temp} F, Max: ${data.weather.max_temp} F, Min: ${data.weather.min_temp} F`;
     }
     document.getElementById("detail-weather").innerHTML = innerHTML;
     console.log(data);
   } catch (error) {
-    console.log("error", error);
+    handleError(error);
   }
 };
 
-const resetUI = () => {
+const resetUI = async (event) => {
+  event.preventDefault();
+  const data = await postData("http://localhost:8081/clearData");
   document.getElementById(
     "dest-photo"
   ).innerHTML = `<img src="https://www.publicdomainpictures.net/pictures/290000/velka/using-gps.jpg" alt="Location photo" class="dest-photo">`;
@@ -253,8 +272,61 @@ const resetUI = () => {
   document.getElementById("detail-countdown").innerHTML =
     "Enter information below.";
   document.getElementById("detail-weather").innerHTML = "";
+  document.getElementById("extra-table").innerHTML = `
+    <tbody id="detail-flight"></tbody>
+    <tbody id="detail-lodging"></tbody>
+    <tbody id="detail-packing"></tbody>
+    <tbody id="detail-notes"></tbody>
+  `;
+};
+
+const addExtraInfo = (name, event) => {
+  event.preventDefault();
+  modal.style.display = "block";
+  document.getElementById(`${name}-modal-content`).style.display = "block";
+};
+
+const saveExtraInfo = async (name, event) => {
+  event.preventDefault();
+  const info = document.getElementById(`${name}-info`).value;
+  if (info.length === 0) {
+    closeModal();
+    return;
+  }
+  const _data = { [name]: info };
+  const data = await postData("http://localhost:8081/updateData", _data);
+  document.getElementById(`detail-${name}`).innerHTML = `
+    <tr>
+      <td class="td-title">
+        ${name} info:
+      </td>
+      <td class="td-info">
+        ${data[name]}
+      </td>
+    </tr>
+  `;
+  closeModal();
+};
+
+function closeModal() {
+  flightModal.style.display = "none";
+  lodgingModal.style.display = "none";
+  packingModal.style.display = "none";
+  notesModal.style.display = "none";
+  modal.style.display = "none";
+}
+
+const handleError = (err) => {
+  console.log(err);
+  resetUI();
 };
 
 setDepartingRange();
 
-export { handleSubmit, resetUI };
+window.onclick = function (event) {
+  if (event.target == modal) {
+    closeModal();
+  }
+};
+
+export { handleSubmit, resetUI, saveExtraInfo, addExtraInfo, closeModal };

@@ -58,6 +58,19 @@ app.post("/addData", (req, res) => {
   res.send(projectData);
 });
 
+app.post("/updateData", (req, res) => {
+  console.log(req.body);
+  projectData = { ...projectData, ...req.body };
+  console.log(projectData);
+  res.send(projectData);
+});
+
+app.post("/clearData", (req, res) => {
+  console.log("clearData");
+  projectData = {};
+  res.send(projectData);
+});
+
 app.post("/geonames", (req, res) => {
   const location = req.body.location;
   console.log("server:geonames:location", location);
