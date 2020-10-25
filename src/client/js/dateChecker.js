@@ -1,6 +1,4 @@
 function checkForDate(inputText) {
-  console.log("checkForDate", inputText);
-
   const regexp = /^.+$/;
   const match = regexp.test(inputText);
 

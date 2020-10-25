@@ -6,6 +6,12 @@ const data = [];
 const dotenv = require("dotenv");
 dotenv.config();
 
+const textapi = {
+  geonamesKey: process.env.GEONAMES_UN,
+  pixabayKey: process.env.PIXABAY_API_KEY,
+  weatherbitKey: process.env.WEATHERBIT_API_KEY,
+};
+
 const PORT = process.env.PORT || 8081;
 
 const express = require("express");
@@ -54,26 +60,21 @@ app.post("/addData", (req, res) => {
   data.push(newEntry);
   // Save latest entry to projectData.
   projectData = { ...newEntry };
-  console.log("projectData=", projectData);
   res.send(projectData);
 });
 
 app.post("/updateData", (req, res) => {
-  console.log(req.body);
   projectData = { ...projectData, ...req.body };
-  console.log(projectData);
   res.send(projectData);
 });
 
 app.post("/clearData", (req, res) => {
-  console.log("clearData");
   projectData = {};
   res.send(projectData);
 });
 
 app.post("/geonames", (req, res) => {
   const location = req.body.location;
-  console.log("server:geonames:location", location);
   geonamesAPI(location)
     .then((data) => {
       res.send(data);
@@ -83,12 +84,8 @@ app.post("/geonames", (req, res) => {
 
 app.post("/weatherbit", (req, res) => {
   const { lat, lon, type, start_day, end_day } = req.body;
-  console.log(
-    `server:weatherbit: lat=${lat},lon=${lon},type=${type},start_day=${start_day},end_day=${end_day}`
-  );
   weatherbitAPI(lat, lon, type, start_day, end_day)
     .then((data) => {
-      console.log(data);
       res.send(data);
     })
     .catch((err) => console.log("server:geonames:error", err));
@@ -96,7 +93,6 @@ app.post("/weatherbit", (req, res) => {
 
 app.post("/pixabay", (req, res) => {
   const location = req.body.location;
-  console.log("server:pixabay:query", location);
   pixabayAPI(location)
     .then((data) => {
       res.send(data);

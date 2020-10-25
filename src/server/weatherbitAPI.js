@@ -1,16 +1,11 @@
-const dotenv = require("dotenv");
 const axios = require("axios");
-
-dotenv.config();
-
-const textapi = {
-  application_key: process.env.WEATHERBIT_API_KEY,
-};
+const textapi = require("./textapi");
 
 const TYPE = {
   forecast: "forecast",
   normals: "normals",
 };
+
 const BASE = "https://api.weatherbit.io/v2.0";
 const FORECAST = "forecast/daily";
 const NORMALS = "normals";
@@ -35,15 +30,13 @@ const getAPIData = async (
       break;
   }
   const sb = [
-    `${BASE}/${typeURL}?units=${UNITS}&lat=${lat}&lon=${lon}&key=${textapi.application_key}`,
+    `${BASE}/${typeURL}?units=${UNITS}&lat=${lat}&lon=${lon}&key=${textapi.weatherbitKey}`,
     dateRange,
   ];
   const reqURL = sb.join("");
-  console.log("weatherbitAPI:reqURL", reqURL);
   try {
     const res = await axios.get(reqURL);
     // axios parses JSON responses.
-    // console.log(res.data);
     return res.data;
   } catch (error) {
     console.log("weatherbitAPI:ERROR:", error);

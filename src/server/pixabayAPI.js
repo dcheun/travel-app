@@ -1,11 +1,5 @@
-const dotenv = require("dotenv");
 const axios = require("axios");
-
-dotenv.config();
-
-const textapi = {
-  application_key: process.env.PIXABAY_API_KEY,
-};
+const textapi = require("./textapi");
 
 const BASE_URL = "https://pixabay.com/api/";
 const API_OPTS = {
@@ -17,8 +11,7 @@ const API_OPTS = {
 };
 
 const getAPIData = async (query) => {
-  const reqURL = `${BASE_URL}?key=${textapi.application_key}&q=${query}&image_type=${API_OPTS.imageType}&safesearch=${API_OPTS.safeSearch}&filter=${API_OPTS.filter}&page=${API_OPTS.page}&per_page=${API_OPTS.per_page}`;
-  console.log("pixabayAPI:reqURL", reqURL);
+  const reqURL = `${BASE_URL}?key=${textapi.pixabayKey}&q=${query}&image_type=${API_OPTS.imageType}&safesearch=${API_OPTS.safeSearch}&filter=${API_OPTS.filter}&page=${API_OPTS.page}&per_page=${API_OPTS.per_page}`;
   try {
     const res = await axios.get(reqURL);
     // axios parses JSON responses.

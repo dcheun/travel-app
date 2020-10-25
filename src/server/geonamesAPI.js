@@ -1,18 +1,11 @@
-const dotenv = require("dotenv");
 const axios = require("axios");
-
-dotenv.config();
-
-const textapi = {
-  application_key: process.env.GEONAMES_UN,
-};
+const textapi = require("./textapi");
 
 const BASE_URL = "http://api.geonames.org/postalCodeSearchJSON";
 const MAX_ROWS = 10;
 
 const getAPIData = async (placename = "") => {
-  reqURL = `${BASE_URL}?placename=${placename}&maxRows=${MAX_ROWS}&username=${textapi.application_key}`;
-  console.log("geonamesAPI:reqURL", reqURL);
+  reqURL = `${BASE_URL}?placename=${placename}&maxRows=${MAX_ROWS}&username=${textapi.geonamesKey}`;
   try {
     const res = await axios.get(reqURL);
     // axios parses JSON responses.
