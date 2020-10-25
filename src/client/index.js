@@ -4,6 +4,7 @@ import {
   addExtraInfo,
   saveExtraInfo,
   closeModal,
+  setUp,
 } from "./js/app";
 import { checkForLocation } from "./js/locationChecker";
 import { checkForDate } from "./js/dateChecker";
@@ -34,6 +35,8 @@ extraInfo.forEach((name) => {
     .addEventListener("click", closeModal);
 });
 
+setUp();
+
 export {
   handleSubmit,
   resetUI,
@@ -41,4 +44,5 @@ export {
   saveExtraInfo,
   checkForLocation,
   checkForDate,
+  setUp,
 };

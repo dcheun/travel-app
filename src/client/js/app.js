@@ -171,34 +171,38 @@ const updateUI = async () => {
     document.getElementById("detail-countdown").innerHTML = `${
       data.location
     } is ${data.countdown} day${data.countdown > 1 ? "s" : ""} away`;
-    let innerHTML = "";
-    if (data.weatherType === "forecast") {
-      innerHTML = `
-        <div class="detail-weather-hdr">Weather forecast:</div>
-        <table class="weather-table">
-          <tr>
-            <td rowspan="2" class="td-icon">
-              <img class="weather-icon" alt="Weather Icon"
-                src="https://www.weatherbit.io/static/img/icons/${data.weather.weather.icon}.png" />
-            </td>
-            <td class="td-temp">
-              High: ${data.weather.high_temp} F, Low: ${data.weather.low_temp} F
-            </td>
-          </tr>
-          <tr>
-            <td class="td-desc">${data.weather.weather.description}</td>
-          </tr>
-        </table>
-        `;
-    } else {
-      innerHTML = `
-        <div class="detail-weather-hdr">Typical weather for then is:
-        </div>Avg: ${data.weather.temp} F, Max: ${data.weather.max_temp} F, Min: ${data.weather.min_temp} F`;
-    }
-    document.getElementById("detail-weather").innerHTML = innerHTML;
+    document.getElementById("detail-weather").innerHTML = weatherTemplate(data);
   } catch (error) {
     handleError(error);
   }
+};
+
+const weatherTemplate = (data) => {
+  let innerHTML = "";
+  if (data.weatherType === "forecast") {
+    innerHTML = `
+      <div class="detail-weather-hdr">Weather forecast:</div>
+      <table class="weather-table">
+        <tr>
+          <td rowspan="2" class="td-icon">
+            <img class="weather-icon" alt="Weather Icon"
+              src="https://www.weatherbit.io/static/img/icons/${data.weather.weather.icon}.png" />
+          </td>
+          <td class="td-temp">
+            High: ${data.weather.high_temp} F, Low: ${data.weather.low_temp} F
+          </td>
+        </tr>
+        <tr>
+          <td class="td-desc">${data.weather.weather.description}</td>
+        </tr>
+      </table>
+      `;
+  } else {
+    innerHTML = `
+      <div class="detail-weather-hdr">Typical weather for then is:
+      </div>Avg: ${data.weather.temp} F, Max: ${data.weather.max_temp} F, Min: ${data.weather.min_temp} F`;
+  }
+  return innerHTML;
 };
 
 const resetUI = async (event) => {
@@ -263,13 +267,14 @@ const handleError = (err) => {
   resetUI();
 };
 
-setDepartingRange();
-
-// Closes the modal if any part of it is clicked, eg: outside the dialog box.
-window.onclick = function (event) {
-  if (event.target == modal) {
-    closeModal();
-  }
+const setUp = () => {
+  setDepartingRange();
+  // Closes the modal if any part of it is clicked, eg: outside the dialog box.
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      closeModal();
+    }
+  };
 };
 
 export {
@@ -278,5 +283,7 @@ export {
   saveExtraInfo,
   addExtraInfo,
   closeModal,
+  setUp,
   calculateCountdown,
+  weatherTemplate,
 };
