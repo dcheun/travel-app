@@ -243,9 +243,20 @@ const updateUI = async () => {
     if (data.weatherType === "forecast") {
       innerHTML = `
         <div class="detail-weather-hdr">Weather forecast:</div>
-        <img class="weather-icon" alt="Weather Icon" src="https://www.weatherbit.io/static/img/icons/${data.weather.weather.icon}.png" />
-        High: ${data.weather.high_temp} F, Low: ${data.weather.low_temp} F
-        <br />${data.weather.weather.description} throughout the day.
+        <table class="weather-table">
+          <tr>
+            <td rowspan="2" class="td-icon">
+              <img class="weather-icon" alt="Weather Icon"
+                src="https://www.weatherbit.io/static/img/icons/${data.weather.weather.icon}.png" />
+            </td>
+            <td class="td-temp">
+              High: ${data.weather.high_temp} F, Low: ${data.weather.low_temp} F
+            </td>
+          </tr>
+          <tr>
+            <td class="td-desc">${data.weather.weather.description}</td>
+          </tr>
+        </table>
         `;
     } else {
       innerHTML = `

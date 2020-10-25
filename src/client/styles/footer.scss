@@ -1,26 +1,28 @@
 /********* Footer *********/
 
+@import 'config';
+
 .footer-items {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding: 0 var(--hdr-ftr-gutter);
+  padding: 0 $hdr-ftr-gutter;
 }
 
 .social-media {
   display: flex;
   width: 10%;
   justify-content: space-between;
-}
-
-.social-media-icon {
-  cursor: pointer;
-  color: inherit;
-}
-
-.social-media-icon:hover {
-  color: #fbd46d;
+  
+  &-icon {
+    cursor: pointer;
+    color: inherit;
+  }
+  
+  &-icon:hover {
+    color: $accent-color;
+  }
 }
 
 /********* Media Queries *********/

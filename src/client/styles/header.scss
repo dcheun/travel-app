@@ -1,4 +1,6 @@
-/********* Navbar items *********/
+/********* Header/Navbar items *********/
+
+@import 'config';
 
 nav {
   height: 100%;
@@ -6,43 +8,43 @@ nav {
 
 .nav-items {
   display: flex;
-  padding: 0 var(--hdr-ftr-gutter);
+  padding: 0 $hdr-ftr-gutter;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   text-transform: uppercase;
-}
 
-.nav-brand {
-  font-size: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.15rem;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  color: rgb(266,266,266);
+  .nav-brand {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    font-family: $secondary-font;
+    font-weight: 900;
+    color: rgb(266,266,266);
+  }
 }
 
 .nav-links {
   display: flex;
   justify-content: space-around;
   width: 30%;
-}
 
-.nav-links li {
-  list-style: none;
-}
+  li {
+    list-style: none;
 
-.nav-links a {
-  color: rgb(226, 226, 226);
-  text-decoration: none;
-  letter-spacing: 0.2rem;
-  font-size: 0.9rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.nav-links a:hover {
-  color: #fbd46d;
+    a {
+      color: rgb(226, 226, 226);
+      text-decoration: none;
+      letter-spacing: 0.2rem;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    a:hover {
+      color: $accent-color;
+    }
+  }
 }
 
 /********* Media Queries *********/

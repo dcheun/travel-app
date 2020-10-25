@@ -1,22 +1,17 @@
-.container {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
+/************** Grid Layout ***************/
+
+@import 'config';
 
 .top-container {
   display: grid;
   min-height: 100vh;
   grid-template-columns: repeat(12, 1fr);
-  // grid-template-rows: 2fr 1fr 5fr 3fr 1fr;
   grid-template-rows: 6rem auto 12rem 3rem;
 }
 
 header {
   grid-column: span 12;
-  background-color: #222831;
-  // color: rgb(226, 226, 226);
-  // display: flex;
-  // align-items: center;
+  background-color: $primary-color;
 }
 
 main {
@@ -25,7 +20,7 @@ main {
   min-height: 100%;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 4rem auto;
-  background-color: #eee;
+  background-color: $light-color;
 }
 
 .title-box {
@@ -33,7 +28,7 @@ main {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
-  padding-left: var(--main-gutter);
+  padding-left: $main-gutter;
 }
 
 .detail-box {
@@ -45,13 +40,13 @@ main {
 .detail-1 {
   grid-column: span 6;
   padding-right: 1rem;
-  padding-left: var(--main-gutter);
+  padding-left: $main-gutter;
 }
 
 .detail-2 {
   grid-column: span 6;
   padding-left: 1rem;
-  padding-right: var(--main-gutter);
+  padding-right: $main-gutter;
 }
 
 .input-box {
@@ -98,35 +93,31 @@ main {
 
 footer {
   grid-column: span 12;
-  background-color: #4f8a8b;
+  background-color: $secondary-color;
   color: rgb(226, 226, 226);
 }
 
 /********* Media Queries *********/
 
 @media screen and (max-width: 1024px) {
-  :root {
-    --main-gutter: 3em;
-  }
+  $main-gutter: 3em;
 }
 
 @media screen and (max-width: 768px) {
-  :root {
-    --main-gutter: 1.5em;
-    --hdr-ftr-gutter: 1.5em;
-  }
+  $main-gutter: 1.5em;
+  $hdr-ftr-gutter: 1.5em;
 
   .detail-1 {
     grid-column: span 12;
-    padding-left: var(--main-gutter);
-    padding-right: var(--main-gutter);
+    padding-left: $main-gutter;
+    padding-right: $main-gutter;
     margin-bottom: 1rem;
   }
   
   .detail-2 {
     grid-column: span 12;
-    padding-left: var(--main-gutter);
-    padding-right: var(--main-gutter);
+    padding-left: $main-gutter;
+    padding-right: $main-gutter;
     margin-bottom: 1rem;
   }
 }

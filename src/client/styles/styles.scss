@@ -1,52 +1,16 @@
+// Main Styles
+
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;900&family=Playfair+Display:wght@400;500;800&family=Poppins&display=swap');
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-:root {
-  --main-gutter: 4em;
-  --hdr-ftr-gutter: 2em;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
+@import 'config';
+@import 'button';
 
 body {
-  background: #fffff8;
-  font-family: 'Poppins', sans-serif;
+  background: $light-color-2;
+  font-family: $primary-font;
   line-height: 2rem;
 }
-
-#app {
-    display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    height: 100vh;
-    background: #f23557;
-    color: #f0d43a;
-    justify-content: center;
-    grid-gap: 1em;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
-
-.holder {}
-
-.entry {
-    background: rgba(59, 74, 107, .4);
-}
-
-#entryHolder {}
-
-#date {}
-
-#temp {}
-
-#content {}
-
-.headline {}
-
-.title {}
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label {
@@ -60,156 +24,35 @@ input {
   display: block;
   height: 2rem;
   width: 15rem;
-  // background: #22b2da;
-  // color: #fffff8;
   font-size: 1.5rem;
-  // font-family: 'Oswald', sans-serif;
-  // border: 1px solid black;
   border: 1px solid rgba(0,0,0,0.5);
   border-style: none none solid none;
-}
-
-button {
-  padding: 0.5rem 1rem;
-  background: #fffff8;
-  font-size: 1.5rem;
-  // font-family: 'Oswald', sans-serif;
-  border: 0.2rem solid black;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-
-.btn-add {
-  border-radius: 2rem;
-  font-size: 1rem;
-  border: 0.15rem solid black;
-  background: none;
-  padding-left: 0.85rem;
-  padding-right: 0.85rem;
-  margin-bottom: 0.5rem;
-}
-
-.detail-save {
-  margin-right: 1rem;
-}
-
-button:hover:not(.disabled) {
-  color: #fffff8;
-  background-color: #222831;
-}
-
-button.disabled {
-  cursor: not-allowed;
-  color: #999;
-  border: 0.15rem solid #999;
 }
 
 h1 {
   font-size: 3.5rem;
 }
 
-// textarea {
-//     background: #22b2da;
-//     color: #f0d43a;
-//     font-size: 20px;
-//     font-family: 'Oswald', sans-serif;
-// }
-
 /* Reset style for HTML element on active to have no border*/
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-    outline: none;
+  outline: none;
 }
 
 /* Style for Placeholder Text*/
 ::placeholder {
-    /* Firefox, Chrome, Opera */
-    color: #636c72;
+  /* Firefox, Chrome, Opera */
+  color: $placeholder-color;
 }
 
 :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: #636c72;
+  /* Internet Explorer 10-11 */
+  color: $placeholder-color;
 }
 
 ::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: #636c72;
-}
-
-/* The Modal (background) */
-#modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  position: relative;
-  top: 40%;
-  transform: translateY(-50%);
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 54rem;
-  z-index: 2;
-}
-
-#flight-modal-content,
-#lodging-modal-content,
-#packing-modal-content,
-#notes-modal-content
-{
-  display: none;
-}
-
-.modal-label,
-.modal-input {
-  margin: 1rem;
-}
-
-.modal-input-grp {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.modal-btn-grp {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin-right: 1rem;
-}
-
-.modal-btn {
-  font-size: 1.2rem;
-  margin: 1rem 0.3rem;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+  /* Microsoft Edge */
+  color: $placeholder-color;
 }

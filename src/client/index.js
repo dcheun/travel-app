@@ -10,6 +10,7 @@ import { checkForDate } from "./js/dateChecker";
 
 import "./styles/resets.scss";
 import "./styles/styles.scss";
+import "./styles/modal.scss";
 import "./styles/grid.scss";
 import "./styles/header.scss";
 import "./styles/detail.scss";

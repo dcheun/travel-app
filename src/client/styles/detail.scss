@@ -1,3 +1,7 @@
+/************** Trip Details Pane ***************/
+
+@import 'config';
+
 .dest-photo {
   width: 100%;
 }
@@ -23,19 +27,36 @@
 }
 
 .loading {
-  background-color: #fbd46d;
+  background-color: $accent-color;
 }
 
 .weather-icon {
-  height: 3rem;
-  width: 3rem;
-  vertical-align: middle;
+  height: 5rem;
+  width: 5rem;
 }
 
-.extra-table {
+%table-shared {
   width: 100%;
   max-width: 32rem;
   margin-bottom: 1rem;
+}
+
+.extra-table,
+.weather-table {
+  @extend %table-shared;
+}
+
+.td-icon {
+  text-align: center;
+  vertical-align: center;
+}
+
+.td-temp {
+  vertical-align: bottom;
+}
+
+.td-desc {
+  vertical-align: top;
 }
 
 .td-title {
